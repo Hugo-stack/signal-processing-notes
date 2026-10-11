@@ -20,13 +20,7 @@
 
 节点是数据，箭头是操作。交换图表达的是：从同一个起点沿不同路径计算，会得到同一个终点。不是说箭头上的矩阵可以任意交换乘法顺序。
 
-```math
-\begin{array}{ccc}
-Y & \xrightarrow{K_f} & \hat X_{\mathrm C}\\[6pt]
-{\scriptstyle A}\downarrow & \nearrow{\scriptstyle B_{\mathrm C}} & \\[6pt]
-W & &
-\end{array}
-```
+![两条路径等价的交换图](causal-exchange-01.png)
 
 上方路径直接估计；下方路径先白化再估计。图对应的等式是
 
@@ -64,13 +58,7 @@ K_fY=B_{\mathrm C}(AY),\qquad K_f=B_{\mathrm C}A.
 
 记 $`P_{\mathrm{all}}`$ 为投影到全部观测的闭线性空间，$`P_{\mathrm{past}}`$ 为投影到截至当前的观测空间。
 
-```math
-\begin{array}{ccc}
-X_n & \xrightarrow{P_{\mathrm{past}}} & \hat X_{\mathrm C,n}\\[6pt]
-{\scriptstyle P_{\mathrm{all}}}\downarrow & \nearrow{\scriptstyle P_{\mathrm{past}}} & \\[6pt]
-\hat X_{\mathrm{NC},n} & &
-\end{array}
-```
+![两条路径等价的交换图](causal-exchange-02.png)
 
 直接根据过去估计真实目标，与根据过去估计“全部信息下的最优估计”，结果相同：
 
@@ -119,13 +107,7 @@ S_Y^+(\omega)=\sqrt{r_e}L(e^{j\omega}),
 
 ### 因果维纳解的交换图
 
-```math
-\begin{array}{ccc}
-Y & \xrightarrow{H_{\mathrm C}} & \hat X_{\mathrm C}\\[6pt]
-{\scriptstyle 1/S_Y^+}\downarrow & \nearrow{\scriptstyle [S_{XY}/S_Y^-]_+} & \\[6pt]
-W & &
-\end{array}
-```
+![两条路径等价的交换图](causal-exchange-03.png)
 
 下方路径先做单位功率白化，再对白观测进行最优因果估计。因为
 
@@ -204,13 +186,7 @@ R_{XY}L^{-*}D^{-1}-K_fL=U^+L^{-*}D^{-1}.
 
 令 $`B=R_{XY}L^{-*}D^{-1}`$，则有交换图：
 
-```math
-\begin{array}{ccc}
-Y & \xrightarrow{K_f} & \hat X_{\mathrm C}\\[6pt]
-{\scriptstyle L^{-1}}\downarrow & \nearrow{\scriptstyle [B]_L} & \\[6pt]
-W & &
-\end{array}
-```
+![两条路径等价的交换图](causal-exchange-04.png)
 
 下方先得到二阶矩为 $`D`$ 的正交分量，再对无约束最优矩阵 $`B`$ 删除未来系数。截断的是白化后的 $`B`$，不是原来的 $`K_s`$。
 
@@ -247,13 +223,7 @@ H_Y=z\left(1-\frac{p_0}{S_X^+}\right).
 
 这里 $`H_Y`$ 的输入是延迟过程 $`Y`$。从原过程 $`X`$ 出发，还必须计入一拍延迟。
 
-```math
-\begin{array}{ccc}
-X & \xrightarrow{G} & \hat X\\[6pt]
-{\scriptstyle z^{-1}}\downarrow & \nearrow{\scriptstyle H_Y} & \\[6pt]
-Y & &
-\end{array}
-```
+![两条路径等价的交换图](causal-exchange-05.png)
 
 上方直接预测；下方先将上一刻的值当作当前观测，再用旧的因果滤波器。两条路径相等：
 
@@ -323,13 +293,7 @@ S_X(\omega)
 
 ### 白化输出与预测残差的交换图
 
-```math
-\begin{array}{ccc}
-X & \xrightarrow{L^{-1}} & e\\[6pt]
-{\scriptstyle X\mapsto(X,GX)}\downarrow & \nearrow{\scriptstyle (u,v)\mapsto u-v} & \\[6pt]
-(X,\hat X) & &
-\end{array}
-```
+![两条路径等价的交换图](causal-exchange-06.png)
 
 上方直接白化；下方先预测再作差。两条路径相等，意味着
 
@@ -387,14 +351,7 @@ K_f=K_p+gL^{-1},\qquad g=1-\frac r{r_e}.
 
 ### 直接滤波与预测修正的交换图
 
-```math
-\begin{array}{ccc}
-Y & \xrightarrow{K_f} & \hat S_{n|n}\\[6pt]
-{\scriptstyle Y\mapsto((K_pY)_n,(L^{-1}Y)_n)}\downarrow
-& \nearrow{\scriptstyle (u,v)\mapsto u+gv} & \\[6pt]
-(\hat S_{n|n-1},e_n) & &
-\end{array}
-```
+![两条路径等价的交换图](causal-exchange-07.png)
 
 上方直接用最优滤波器；下方提取历史预测与观测新息，再融合。此图上方也在时刻 $`n`$ 取输出。因为
 
